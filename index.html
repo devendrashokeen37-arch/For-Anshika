@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Anshika</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* The floating hearts */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            background-color: #ff3366;
+            transform: rotate(-45deg);
+            animation: floatUp linear infinite;
+            opacity: 0.8;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -50%;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 50%;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(-45deg) scale(0.6);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(-45deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Message styling with slow fade-in effect */
+        .message-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            max-width: 80%;
+            animation: revealText 6s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        h1 {
+            color: #ffb3c6;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+
+        @keyframes revealText {
+            0% {
+                opacity: 0.05;
+                filter: blur(4px);
+            }
+            50% {
+                opacity: 0.4;
+                filter: blur(2px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message-container">
+        <h1>Anshika, thou art a vision of such exquisite grace that even the stars pale in thy presence.</h1>
+    </div>
+
+    <script>
+        // Generate random floating hearts of different pink shades and sizes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Random sizes
+            const size = Math.random() * 20 + 10; // 10px to 30px
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+
+            // Random horizontal position
+            heart.style.left = `${Math.random() * 100}vw`;
+
+            // Random pink/magenta shades
+            const pinkShades = ['#ff1493', '#ff69b4', '#ffb6c1', '#db7093', '#c71585', '#ff4d94'];
+            heart.style.backgroundColor = pinkShades[Math.floor(Math.random() * pinkShades.length)];
+
+            // Random animation speed and delay
+            const duration = Math.random() * 3 + 3; // 3s to 6s
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${Math.random() * 2}s`;
+
+            document.body.appendChild(heart);
+
+            // Remove heart after animation completes to save memory
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + 2) * 1000);
+        }
+
+        // Create hearts continuously
+        setInterval(createHeart, 150);
+    </script>
+</body>
+</html>
